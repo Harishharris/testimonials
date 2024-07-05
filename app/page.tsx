@@ -1,5 +1,5 @@
 import { Button } from '@/components/ui/button';
-import { db } from '@/drizzle/db';
+import Link from 'next/link';
 
 export default async function Home() {
   return (
@@ -9,7 +9,9 @@ export default async function Home() {
         <p className="text-3xl text-gray-600 font-semibold">
           "Read Stories, Real Impack - Discover the difference."
         </p>
-        <Button variant={'default'}>Try Now</Button>
+        <Button variant={'default'}>
+          <Link href={'/dashboard'}>Try Now</Link>
+        </Button>
       </div>
 
       <div className="mt-6 max-w-6xl m-auto mb-8">

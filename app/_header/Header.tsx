@@ -19,7 +19,11 @@ import Link from 'next/link';
 export default async function Header() {
   const user = await currentUser();
 
-  if (user && !db.select().from(userTable).where(eq(userTable.id, user.id))) {
+  if (
+    user &&
+    (await db.select().from(userTable).where(eq(userTable.id, user.id)))
+      .length === 0
+  ) {
     await db.insert(userTable).values({
       id: user.id,
       username: user.firstName!,

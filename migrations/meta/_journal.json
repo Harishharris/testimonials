@@ -8,6 +8,20 @@
       "when": 1720161611053,
       "tag": "0000_furry_unicorn",
       "breakpoints": true
+    },
+    {
+      "idx": 1,
+      "version": "7",
+      "when": 1720187757467,
+      "tag": "0001_high_gorilla_man",
+      "breakpoints": true
+    },
+    {
+      "idx": 2,
+      "version": "7",
+      "when": 1720188479983,
+      "tag": "0002_demonic_stature",
+      "breakpoints": true
     }
   ]
 }

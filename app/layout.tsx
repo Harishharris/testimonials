@@ -1,7 +1,7 @@
 import type { Metadata } from 'next';
 import { Inter } from 'next/font/google';
 import './globals.css';
-import Header from './_header/Header';
+import Header from './_header/header';
 
 import {
   ClerkProvider,

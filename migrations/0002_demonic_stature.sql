@@ -1,0 +1,1 @@
+ALTER TABLE "space_table" ADD PRIMARY KEY ("id");

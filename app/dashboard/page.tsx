@@ -1,8 +1,6 @@
-import { db } from '@/drizzle/db';
-import { spaceTable } from '@/drizzle/schema';
 import { currentUser } from '@clerk/nextjs/server';
 import Overview from './(components)/overview';
-import CreateButton from './(components)/create-new-space-button';
+import CreateButton from './(components)/create-new-space';
 import YourSpaces from './(components)/your-spaces';
 
 export default async function Page() {

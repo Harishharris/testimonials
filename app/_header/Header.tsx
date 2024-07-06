@@ -1,18 +1,9 @@
-import { Button } from '@/components/ui/button';
-import {
-  SignIn,
-  SignInButton,
-  SignUpButton,
-  SignedIn,
-  SignedOut,
-  UserButton,
-} from '@clerk/nextjs';
+import { SignedIn, SignedOut, UserButton } from '@clerk/nextjs';
 import Image from 'next/image';
 import { currentUser, User } from '@clerk/nextjs/server';
 import { db } from '@/drizzle/db';
 import { userTable } from '@/drizzle/schema';
 import { eq } from 'drizzle-orm';
-import { redirect } from 'next/navigation';
 import LoginButton from './login-button';
 import Link from 'next/link';
 
@@ -43,7 +34,6 @@ export default async function Header() {
           </SignedIn>
           <SignedOut>
             <LoginButton />
-            {/* <Button>Log in</Button> */}
           </SignedOut>
         </div>
       </div>

@@ -22,6 +22,20 @@
       "when": 1720188479983,
       "tag": "0002_demonic_stature",
       "breakpoints": true
+    },
+    {
+      "idx": 3,
+      "version": "7",
+      "when": 1720248968505,
+      "tag": "0003_small_fallen_one",
+      "breakpoints": true
+    },
+    {
+      "idx": 4,
+      "version": "7",
+      "when": 1720249129021,
+      "tag": "0004_sharp_husk",
+      "breakpoints": true
     }
   ]
 }

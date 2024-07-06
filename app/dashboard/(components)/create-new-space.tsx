@@ -2,7 +2,7 @@
 
 import { useState } from 'react';
 import { Plus } from 'lucide-react';
-import Link from 'next/link';
+import { Icon } from 'lucide-react';
 import {
   Dialog,
   DialogContent,
@@ -11,11 +11,11 @@ import {
   DialogTitle,
   DialogTrigger,
 } from '@/components/ui/dialog';
-import { Label } from '@/components/ui/label';
 
 import { z } from 'zod';
 import { zodResolver } from '@hookform/resolvers/zod';
 import { useForm } from 'react-hook-form';
+import { useRouter } from 'next/navigation';
 
 import { Button } from '@/components/ui/button';
 import {
@@ -28,16 +28,24 @@ import {
   FormMessage,
 } from '@/components/ui/form';
 import { Input } from '@/components/ui/input';
+import { useToast } from '@/components/ui/use-toast';
+import { currentUser } from '@clerk/nextjs/server';
 
 const formSchema = z.object({
   name: z.string().min(2, {
     message: 'Website name must be atlease 8 characters',
   }),
-  url: z.string().url(),
+  url: z.string().url({
+    message: 'Website must start with http://',
+  }),
 });
 
 export default function CreateButton() {
+  const { toast } = useToast();
   const [isOpened, setIsOpened] = useState(false);
+  const [errorMessage, setErrorMessage] = useState('');
+  const router = useRouter();
+
   const form = useForm({
     resolver: zodResolver(formSchema),
     defaultValues: {
@@ -46,9 +54,25 @@ export default function CreateButton() {
     },
   });
 
-  const onSubmit = (values: z.infer<typeof formSchema>) => {
+  const onSubmit = async (values: z.infer<typeof formSchema>) => {
     console.log(values);
+    try {
+      const res = await fetch('/api/create', {
+        method: 'POST',
+        body: JSON.stringify({
+          ...values,
+        }),
+      });
+    } catch (err) {
+      console.log(err);
+      setErrorMessage('Something went wrong. Try again!');
+      return;
+    }
     setIsOpened(false);
+    toast({
+      title: 'Space created successfully',
+    });
+    router.refresh();
   };
 
   return (
@@ -57,10 +81,12 @@ export default function CreateButton() {
         open={isOpened}
         onOpenChange={() => setIsOpened((prevState) => !prevState)}
       >
-        <DialogTrigger>
+        <DialogTrigger asChild>
           <Button>
-            <Plus />
-            Create new space
+            <div className="flex items-center justify-center gap-2">
+              <div className="text-2xl">+</div>
+              Create new space
+            </div>
           </Button>
         </DialogTrigger>
         <DialogContent>
@@ -100,6 +126,7 @@ export default function CreateButton() {
                 <Button className="my-4 text" type="submit">
                   Submit
                 </Button>
+                {errorMessage && <p>{errorMessage}</p>}
               </form>
             </Form>
           </DialogDescription>

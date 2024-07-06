@@ -7,7 +7,7 @@ export default async function Home() {
       <div className="max-w-4xl m-auto">
         <div className="mb-6">Get feedback from your customers with ease</div>
         <p className="text-3xl text-gray-600 font-semibold">
-          "Read Stories, Real Impack - Discover the difference."
+          &quot;Read Stories, Real Impack - Discover the difference.&quot;
         </p>
         <Button variant={'default'}>
           <Link href={'/dashboard'}>Try Now</Link>

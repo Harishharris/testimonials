@@ -2,7 +2,7 @@ import { Video, Images, Book } from 'lucide-react';
 
 export default function Overview() {
   return (
-    <div>
+    <div className="mt-4">
       <div className="text-4xl font-semibold">Overview</div>
 
       <div className="flex items-center justify-between gap-4 mt-8">

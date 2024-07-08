@@ -23,8 +23,6 @@ export default async function SpaceHeader({ url }: { url: string }) {
     .where(eq(spaceTable.userId, user.id))
     .limit(1);
 
-  console.log(data);
-
   return (
     <div className="mt-4 ">
       <div className="flex gap-12 max-w-[80%] m-auto items-center">

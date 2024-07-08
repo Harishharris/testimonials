@@ -1,0 +1,1 @@
+ALTER TABLE "testimonial_table" ALTER COLUMN "images" SET DEFAULT '{}'::text[];

@@ -17,6 +17,7 @@ export default function Tabs({ currentTab, setCurrentTab }: Props) {
       <div className="flex gap-2 flex-col">
         {tabs.map((tab) => (
           <div
+            key={tab}
             className={cn(
               'text-xl px-2 pl-4 py-1 rounded-md cursor-pointer',
               currentTab === tab && 'bg-gray-800',

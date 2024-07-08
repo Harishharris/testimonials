@@ -7,7 +7,7 @@ export default function SpacePage({
   params: { url: string };
 }) {
   return (
-    <div className="">
+    <div>
       <SpaceHeader url={url} />
       <MainPage />
     </div>

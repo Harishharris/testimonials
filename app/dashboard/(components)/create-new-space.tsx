@@ -55,7 +55,6 @@ export default function CreateButton() {
   });
 
   const onSubmit = async (values: z.infer<typeof formSchema>) => {
-    console.log(values);
     try {
       const res = await fetch('/api/create', {
         method: 'POST',
@@ -64,7 +63,6 @@ export default function CreateButton() {
         }),
       });
     } catch (err) {
-      console.log(err);
       setErrorMessage('Something went wrong. Try again!');
       return;
     }

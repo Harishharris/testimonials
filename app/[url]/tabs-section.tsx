@@ -1,12 +1,13 @@
+import RenderAllTestimonials from './all-testimonials';
+
 export default function CurrentTabSection({
   currentTab,
 }: {
   currentTab: string;
 }) {
   return (
-    <div>
-      <div>Current Tab section</div>
-      <div>{currentTab}</div>
+    <div className="flex-1">
+      <RenderAllTestimonials currentTab={currentTab} />
     </div>
   );
 }

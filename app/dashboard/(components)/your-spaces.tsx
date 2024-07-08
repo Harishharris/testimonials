@@ -24,11 +24,8 @@ export default async function YourSpaces() {
   return (
     <div className="mt-6 hover:cursor-pointer grid grid-cols-3 gap-6">
       {data.map((item) => (
-        <Link href={item.id}>
-          <div
-            key={item.id}
-            className="bg-gray-800 flex px-10 py-4 border rounded-lg border-slate-400 w-80"
-          >
+        <Link href={item.id} key={item.id}>
+          <div className="bg-gray-800 flex px-10 py-4 border rounded-lg border-slate-400 w-80">
             <div className="flex items-center justify-between gap-8">
               <div>
                 <Images />

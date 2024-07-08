@@ -1,4 +1,5 @@
 import SpaceHeader from './space-header';
+import MainPage from './main-page';
 
 export default function SpacePage({
   params: { url },
@@ -6,8 +7,9 @@ export default function SpacePage({
   params: { url: string };
 }) {
   return (
-    <div>
+    <div className="">
       <SpaceHeader url={url} />
+      <MainPage />
     </div>
   );
 }

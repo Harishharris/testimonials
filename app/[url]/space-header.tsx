@@ -10,9 +10,11 @@ import { redirect } from 'next/navigation';
 
 export default async function SpaceHeader({ url }: { url: string }) {
   const user = await currentUser();
+
   if (!user || !user.id) {
     return redirect('/sign-in');
   }
+
   const data = await db
     .select({
       spacename: spaceTable.spacename,

@@ -1,10 +1,11 @@
 import { Images } from 'lucide-react';
 import { db } from '@/drizzle/db';
-import { spaceTable, userTable } from '@/drizzle/schema';
+import { spaceTable, testimonialTable, userTable } from '@/drizzle/schema';
 import { currentUser } from '@clerk/nextjs/server';
 import { eq } from 'drizzle-orm';
 import { redirect } from 'next/navigation';
 import Link from 'next/link';
+import RenderStats from './render-stats';
 
 export default async function YourSpaces() {
   const user = await currentUser();
@@ -33,10 +34,7 @@ export default async function YourSpaces() {
 
               <div className="text-xl text-semibold flex flex-col gap-2">
                 {item.url}
-                <div className="flex gap-4">
-                  <p>Videos: 0</p>
-                  <p>Text: 0</p>
-                </div>
+                <RenderStats url={item.id} />
               </div>
             </div>
           </div>

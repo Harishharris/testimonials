@@ -25,7 +25,6 @@ export default function RenderAllTestimonials({
   const [searchText, setSearchText] = useState('');
 
   function getCorrespondingTestimonials() {
-    console.log(currentTab);
     if (currentTab === 'video') {
       return testimonials?.filter((item) => !!item.video);
     }
@@ -60,7 +59,7 @@ export default function RenderAllTestimonials({
           },
         });
         const data = await res.json();
-        setTestimonials(data.data);
+        setTestimonials(data.data.slice().reverse());
       } catch (err: any) {
         console.log(err.message);
       } finally {
@@ -107,7 +106,8 @@ export default function RenderAllTestimonials({
                   .toLowerCase()
                   .includes(searchText.toLowerCase()) ||
                 item.name.toLowerCase().includes(searchText.toLowerCase()) ||
-                item.email.toLowerCase().includes(searchText.toLowerCase())
+                item.email.toLowerCase().includes(searchText.toLowerCase()) ||
+                item.createdAt.toString().includes(searchText.toLowerCase())
             )
             .map((item) => (
               <div key={item.id} className="flex-1">

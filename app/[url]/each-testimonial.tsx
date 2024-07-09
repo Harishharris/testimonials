@@ -52,7 +52,7 @@ export default function EachTestimonialPage({
       <br />
       <div>
         <p className="font-semibold">Submitted At:</p>
-        <p>{JSON.stringify(testimonial.createdAt)}</p>
+        <p>{testimonial.createdAt.toString()}</p>
         {/* <p>{testimonial.createdAt?.toDateString() || 'Date not provided'}</p> */}
       </div>
     </div>

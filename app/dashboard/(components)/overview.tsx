@@ -1,6 +1,19 @@
 import { Video, Images, Book } from 'lucide-react';
+import { db } from '@/drizzle/db';
+import { testimonialTable } from '@/drizzle/schema';
+import { eq } from 'drizzle-orm';
 
-export default function Overview() {
+export default async function Overview() {
+  const data = await db
+    .select({
+      id: testimonialTable.id,
+      images: testimonialTable.images,
+      videos: testimonialTable.video,
+    })
+    .from(testimonialTable);
+  const videoCount = data.filter((item) => item.videos?.length !== 0).length;
+  const photoCount = data.filter((item) => item.images?.length !== 0).length;
+
   return (
     <div className="mt-4">
       <div className="text-4xl font-semibold">Overview</div>
@@ -13,7 +26,7 @@ export default function Overview() {
             </div>
             <div className="text-xl text-semibold">
               Videos
-              <p>0</p>
+              <p>{videoCount}</p>
             </div>
           </div>
         </div>
@@ -25,7 +38,7 @@ export default function Overview() {
             </div>
             <div className="text-xl text-semibold">
               Photos
-              <p>0</p>
+              <p>{photoCount}</p>
             </div>
           </div>
         </div>
@@ -37,7 +50,7 @@ export default function Overview() {
             </div>
             <div className="text-xl text-semibold">
               Reviews
-              <p>0</p>
+              <p>{photoCount + videoCount}</p>
             </div>
           </div>
         </div>

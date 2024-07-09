@@ -31,7 +31,7 @@ export default function EachTestimonialPage({
         <Star fill="yellow" className="mt-4" />
       </div>
       <p className="mb-2">{testimonial.testimonal}</p>
-      <div>
+      <div className="flex gap-4 my-4">
         {testimonial?.images?.map((item) => (
           <RenderImageWithPopOver src={item} />
         ))}

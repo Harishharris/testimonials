@@ -22,6 +22,8 @@ import { Star } from 'lucide-react';
 import { Textarea } from '@/components/ui/textarea';
 import { UploadButton } from '@uploadthing/react';
 import { OurFileRouter } from '@/app/api/uploadthing/core';
+import { useToast } from '@/components/ui/use-toast';
+import { useRouter } from 'next/navigation';
 
 const formSchema = z.object({
   name: z.string().min(2, {
@@ -43,6 +45,8 @@ export default function FeedbackPage({
 }: {
   params: { url: string };
 }) {
+  const router = useRouter();
+  const { toast } = useToast();
   const [imageUrl, setImageUrl] = useState('');
   const [isSubmiting, setIsSubmitting] = useState(true);
 
@@ -71,7 +75,8 @@ export default function FeedbackPage({
         },
       });
       const data = await res.json();
-      console.log('[OK]', values);
+      toast({ description: 'Testimonial Submitted Successfully!' });
+      router.push('/thank-you');
     } catch (err: any) {
       console.log('[ERROR]', err.message);
     }
@@ -91,7 +96,7 @@ export default function FeedbackPage({
   }, []);
 
   return (
-    <div className="flex flex-col gap-2 max-w-[20%] m-auto justify-start py-2">
+    <div className="flex flex-col gap-2 max-w-[20%] m-auto justify-start py-2 mb-16">
       <h2 className="font-bold">Write testimonial to </h2>
       <Image
         src={imageUrl}
@@ -101,7 +106,7 @@ export default function FeedbackPage({
         className="rounded-lg"
       />
       <div>
-        <h1 className="text-xl font-semibold my-4">Questions</h1>
+        <h1 className="text-xl font-semibold my-4 underline">Questions</h1>
         <ul>
           <li>Who are you / What are you working on?</li>
           <li>How has our product / service helped you?</li>

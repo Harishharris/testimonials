@@ -15,17 +15,11 @@ export default function RenderImageWithPopOver({ src }: { src: string }) {
   return (
     <AlertDialog>
       <AlertDialogTrigger>
-        <Image src={src} alt="image" height={100} width={200} />;
+        <Image src={src} alt="image" height={100} width={200} />
       </AlertDialogTrigger>
       <AlertDialogContent className="m-auto w-auto">
         <AlertDialogDescription>
-          <img
-            src={src}
-            alt="image"
-            // height={1}
-            // width={1}
-            className="h-full w-full"
-          />
+          <img src={src} alt="image" className="h-full w-full" />
         </AlertDialogDescription>
         <AlertDialogFooter>
           <AlertDialogCancel>Cancel</AlertDialogCancel>

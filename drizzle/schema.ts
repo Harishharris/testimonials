@@ -21,7 +21,7 @@ export const spaceTable = pgTable('space_table', {
   imageUrl: text('imageUrl'),
 });
 
-export const testimonial = pgTable('testimonial_table', {
+export const testimonialTable = pgTable('testimonial_table', {
   id: text('id')
     .notNull()
     .primaryKey()
@@ -46,5 +46,5 @@ export type InsertUser = typeof userTable.$inferInsert;
 export type SelectUser = typeof userTable.$inferSelect;
 export type InsertSpace = typeof spaceTable.$inferInsert;
 export type SelectSpace = typeof spaceTable.$inferSelect;
-export type SelectTestimonial = typeof testimonial.$inferSelect;
-export type InsertTestimonial = typeof testimonial.$inferInsert;
+export type SelectTestimonial = typeof testimonialTable.$inferSelect;
+export type InsertTestimonial = typeof testimonialTable.$inferInsert;

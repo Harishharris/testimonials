@@ -1,8 +1,6 @@
 'use client';
 
 import { useState } from 'react';
-import { Plus } from 'lucide-react';
-import { Icon } from 'lucide-react';
 import {
   Dialog,
   DialogContent,
@@ -29,7 +27,8 @@ import {
 } from '@/components/ui/form';
 import { Input } from '@/components/ui/input';
 import { useToast } from '@/components/ui/use-toast';
-import { currentUser } from '@clerk/nextjs/server';
+import { UploadButton } from '@uploadthing/react';
+import { OurFileRouter } from '@/app/api/uploadthing/core';
 
 const formSchema = z.object({
   name: z.string().min(2, {
@@ -38,12 +37,16 @@ const formSchema = z.object({
   url: z.string().url({
     message: 'Website must start with http://',
   }),
+  imageUrl: z.string().url({
+    message: 'Image is required',
+  }),
 });
 
 export default function CreateButton() {
   const { toast } = useToast();
   const [isOpened, setIsOpened] = useState(false);
   const [errorMessage, setErrorMessage] = useState('');
+  const [imageUrl, setImageUrl] = useState('');
   const router = useRouter();
 
   const form = useForm({
@@ -51,6 +54,7 @@ export default function CreateButton() {
     defaultValues: {
       name: '',
       url: '',
+      imageUrl: '',
     },
   });
 
@@ -60,6 +64,7 @@ export default function CreateButton() {
         method: 'POST',
         body: JSON.stringify({
           ...values,
+          imageUrl,
         }),
       });
     } catch (err) {
@@ -101,7 +106,11 @@ export default function CreateButton() {
                     <FormItem>
                       <FormLabel>Enter your website name</FormLabel>
                       <FormControl>
-                        <Input placeholder="Website name" {...field} />
+                        <Input
+                          placeholder="Website name"
+                          className="border"
+                          {...field}
+                        />
                       </FormControl>
                       <FormMessage />
                     </FormItem>
@@ -115,12 +124,37 @@ export default function CreateButton() {
                     <FormItem>
                       <FormLabel>Enter url</FormLabel>
                       <FormControl>
-                        <Input placeholder="Website url" {...field} />
+                        <Input
+                          placeholder="Website url"
+                          className="border"
+                          {...field}
+                        />
                       </FormControl>
                       <FormMessage />
                     </FormItem>
                   )}
                 />
+
+                <FormField
+                  control={form.control}
+                  name="imageUrl"
+                  render={({ field }) => (
+                    <FormItem>
+                      <FormLabel>Attach Image</FormLabel>
+                      <FormControl>
+                        <UploadButton<OurFileRouter, 'spaceImage'>
+                          endpoint="spaceImage"
+                          onClientUploadComplete={(res) => {
+                            field.onChange(res[0].url);
+                          }}
+                          onUploadError={(error: Error) => {}}
+                        />
+                      </FormControl>
+                      <FormMessage />
+                    </FormItem>
+                  )}
+                />
+
                 <Button className="my-4 text" type="submit">
                   Submit
                 </Button>

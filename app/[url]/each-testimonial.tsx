@@ -18,11 +18,17 @@ export default function EachTestimonialPage({
 
   return (
     <div className="flex-1 bg-gray-800 p-6 rounded-md gap-2 md-4 hover:bg-gray-700 cursor-pointer">
-      <span className="font-bold text-xl bg-orange-300 px-3 rounded-full ">
+      <span className="font-bold text-xl text-black bg-orange-300 px-3 rounded-full">
         {whichMediaUsed()}
       </span>
-      <Star fill="yellow" />
-      <p>{testimonial.testimonal}</p>
+      <div className="flex items-center justify-start gap-1 mb-2">
+        <Star fill="yellow" className="mt-4" />
+        <Star fill="yellow" className="mt-4" />
+        <Star fill="yellow" className="mt-4" />
+        <Star fill="yellow" className="mt-4" />
+        <Star fill="yellow" className="mt-4" />
+      </div>
+      <p className="mb-2">{testimonial.testimonal}</p>
       <div className="flex items-center gap-[40%]">
         <div>
           <p className="font-semibold">Name</p>
@@ -34,7 +40,10 @@ export default function EachTestimonialPage({
         </div>
       </div>
       <br />
-      {/* <p>{testimonial.createdAt?.toDateString() || 'Date not provided'}</p>*/}
+      <div>
+        <p className="font-semibold">Submitted At:</p>
+        {/* <p>{testimonial.createdAt?.toDateString() || 'Date not provided'}</p> */}
+      </div>
     </div>
   );
 }

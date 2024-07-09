@@ -1,8 +1,9 @@
 import { currentUser } from '@clerk/nextjs/server';
 import { redirect } from 'next/navigation';
-import { testimonial, spaceTable } from '@/drizzle/schema';
+import { testimonialTable, spaceTable } from '@/drizzle/schema';
 import { db } from '@/drizzle/db';
 import { eq, and } from 'drizzle-orm';
+import { NextResponse } from 'next/server';
 
 export async function POST(req: Request) {
   const user = await currentUser();
@@ -17,15 +18,15 @@ export async function POST(req: Request) {
 
   const data = await db
     .select({
-      id: testimonial.id,
-      testimonal: testimonial.testimonial,
-      images: testimonial.images,
-      name: testimonial.name,
-      email: testimonial.email,
-      createdAt: testimonial.createdAt,
+      id: testimonialTable.id,
+      testimonal: testimonialTable.testimonial,
+      images: testimonialTable.images,
+      name: testimonialTable.name,
+      email: testimonialTable.email,
+      createdAt: testimonialTable.createdAt,
     })
-    .from(testimonial)
-    .where(and(eq(testimonial.userId, user.id)));
+    .from(testimonialTable)
+    .where(and(eq(testimonialTable.userId, user.id)));
 
   return Response.json({ data });
 }

@@ -37,7 +37,7 @@ export default async function SpaceHeader({ url }: { url: string }) {
           <div className="font-bold text-4xl">{data[0].spacename}</div>
           <div className="text-md">
             Share Public Testimonial Link:{' '}
-            <Link href={`http://localhost:3000/testimonial/${url}`}>
+            <Link href={`http://localhost:3000/feedback/${url}`}>
               <span className="underline cursor-pointer">{`http://localhost:3000/feedback/${url}`}</span>
             </Link>
           </div>

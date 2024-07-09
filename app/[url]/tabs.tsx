@@ -9,7 +9,7 @@ interface Props {
 }
 
 export default function Tabs({ currentTab, setCurrentTab }: Props) {
-  const tabs = ['all', 'text', 'video', 'liked'];
+  const tabs = ['all', 'text', 'images', 'video', 'liked'];
   const withColors = [];
 
   return (

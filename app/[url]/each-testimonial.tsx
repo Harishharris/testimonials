@@ -1,5 +1,7 @@
 import { Star } from 'lucide-react';
 import { TestimoniaType } from './all-testimonials';
+import Image from 'next/image';
+import RenderImageWithPopOver from './render-image-with-popover';
 
 export default function EachTestimonialPage({
   testimonial,
@@ -29,6 +31,14 @@ export default function EachTestimonialPage({
         <Star fill="yellow" className="mt-4" />
       </div>
       <p className="mb-2">{testimonial.testimonal}</p>
+      <div>
+        {testimonial?.images?.map((item) => (
+          <RenderImageWithPopOver src={item} />
+        ))}
+      </div>
+      <div>
+        {testimonial.video && <iframe src={testimonial.video}></iframe>}
+      </div>
       <div className="flex items-center gap-[40%]">
         <div>
           <p className="font-semibold">Name</p>
@@ -42,6 +52,7 @@ export default function EachTestimonialPage({
       <br />
       <div>
         <p className="font-semibold">Submitted At:</p>
+        <p>{JSON.stringify(testimonial.createdAt)}</p>
         {/* <p>{testimonial.createdAt?.toDateString() || 'Date not provided'}</p> */}
       </div>
     </div>

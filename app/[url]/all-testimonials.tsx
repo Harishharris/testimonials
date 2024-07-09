@@ -22,6 +22,30 @@ export default function RenderAllTestimonials({
   const params = useParams();
   const [testimonials, setTestimonials] = useState<TestimoniaType[]>();
   const [isLoading, setIsLoading] = useState(true);
+  const [searchText, setSearchText] = useState('');
+
+  function getCorrespondingTestimonials() {
+    console.log(currentTab);
+    if (currentTab === 'video') {
+      return testimonials?.filter((item) => !!item.video);
+    }
+
+    if (currentTab == 'text') {
+      return testimonials?.filter((item) => !!item.testimonal);
+    }
+
+    if (currentTab === 'images') {
+      return testimonials?.filter((item) => !!item.images);
+    }
+
+    if (currentTab == 'all') {
+      return testimonials;
+    }
+
+    if (currentTab === 'liked') {
+      return testimonials;
+    }
+  }
 
   useEffect(() => {
     const fetchData = async () => {
@@ -59,19 +83,37 @@ export default function RenderAllTestimonials({
 
   return (
     <div className="flex-1">
-      <div className="flex items-center justify-center gap-2 mb-4">
+      <div className="flex items-center justify-center gap-2 mb-4 flex-1">
         <Search />
-        <Input placeholder="Search by name, email or testimonial keywords" />
+        <Input
+          type="text"
+          value={searchText}
+          onChange={(e) => setSearchText(e.target.value)}
+          placeholder="Search by name, email or testimonial keywords"
+        />
       </div>
-      {testimonials?.length === 0 ? (
-        <div>No Testimonials to show..</div>
+
+      {testimonials?.length === 0 ||
+      getCorrespondingTestimonials()?.length === 0 ? (
+        <div className="text-xl font-bold text-center mt-8">
+          No Testimonials to show..
+        </div>
       ) : (
         <div className="flex-1 flex flex-col gap-4 mb-12">
-          {testimonials?.map((item) => (
-            <div key={item.id} className="flex-1">
-              <EachTestimonialPage testimonial={item} />
-            </div>
-          ))}
+          {getCorrespondingTestimonials()
+            ?.filter(
+              (item) =>
+                item.testimonal
+                  .toLowerCase()
+                  .includes(searchText.toLowerCase()) ||
+                item.name.toLowerCase().includes(searchText.toLowerCase()) ||
+                item.email.toLowerCase().includes(searchText.toLowerCase())
+            )
+            .map((item) => (
+              <div key={item.id} className="flex-1">
+                <EachTestimonialPage testimonial={item} />
+              </div>
+            ))}
         </div>
       )}
     </div>

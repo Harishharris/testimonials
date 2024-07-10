@@ -11,10 +11,6 @@ export async function POST(req: Request) {
     return redirect('/sign-up');
   }
   const { url } = await req.json();
-  // const spaceUrl = await db
-  //   .select({ id: spaceTable.id })
-  //   .from(spaceTable)
-  //   .where(eq(spaceTable.userId, user.id));
 
   const data = await db
     .select({
@@ -23,6 +19,7 @@ export async function POST(req: Request) {
       images: testimonialTable.images,
       name: testimonialTable.name,
       email: testimonialTable.email,
+      video: testimonialTable.video,
       createdAt: testimonialTable.createdAt,
     })
     .from(testimonialTable)

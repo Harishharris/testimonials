@@ -2,12 +2,15 @@ import { Star } from 'lucide-react';
 import { TestimoniaType } from './all-testimonials';
 import Image from 'next/image';
 import RenderImageWithPopOver from './render-image-with-popover';
+import { Button } from '@/components/ui/button';
+import ExportButton from './export-button';
 
 export default function EachTestimonialPage({
   testimonial,
 }: {
   testimonial: TestimoniaType;
 }) {
+  console.log(testimonial);
   function whichMediaUsed() {
     if (testimonial.video) {
       return 'Video';
@@ -37,7 +40,13 @@ export default function EachTestimonialPage({
         ))}
       </div>
       <div>
-        {testimonial.video && <iframe src={testimonial.video}></iframe>}
+        {testimonial.video && (
+          <iframe
+            allowFullScreen
+            allowTransparency
+            src={testimonial.video}
+          ></iframe>
+        )}
       </div>
       <div className="flex items-center gap-[40%]">
         <div>
@@ -50,10 +59,12 @@ export default function EachTestimonialPage({
         </div>
       </div>
       <br />
-      <div>
-        <p className="font-semibold">Submitted At:</p>
-        <p>{testimonial.createdAt.toString()}</p>
-        {/* <p>{testimonial.createdAt?.toDateString() || 'Date not provided'}</p> */}
+      <div className="flex gap-[40%]">
+        <div>
+          <p className="font-semibold">Submitted At:</p>
+          <p>{testimonial.createdAt.toString()}</p>
+        </div>
+        <ExportButton testimonial={testimonial.testimonal} />
       </div>
     </div>
   );

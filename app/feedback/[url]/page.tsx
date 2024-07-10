@@ -199,12 +199,12 @@ export default function FeedbackPage({
             render={({ field }) => (
               <FormItem>
                 <FormControl>
-                  <UploadButton<OurFileRouter, 'testimonialImages'>
-                    endpoint="testimonialImages"
+                  <UploadButton<OurFileRouter, 'testimonialVideo'>
+                    endpoint="testimonialVideo"
                     onClientUploadComplete={(res) => {
-                      field.onChange(res.map((item) => item.url));
+                      console.log(res[0].url);
+                      field.onChange(res[0].url);
                       setIsSubmitting(false);
-                      console.log(res.map((item) => item.url));
                     }}
                     onUploadError={(error: Error) => {}}
                   />

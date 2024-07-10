@@ -44,12 +44,12 @@ export default async function SpaceHeader({ url }: { url: string }) {
             </Link>
           </div>
         </div>
-        <Link href={`/${url}/edit`}>
+        {/* <Link href={`/${url}/edit`}>
           <Button className="flex gap-2 items-center justify-center">
             <Pen />
             Edit Space
           </Button>
-        </Link>
+        </Link> */}
       </div>
       <div className="h-[1px] bg-gray-800 mt-4"></div>
     </div>
